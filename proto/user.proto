@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+  rpc GetUserById (GetUserRequest) returns (UserResponse);
+  rpc DepositWallet (DepositRequest) returns (DepositResponse);
+}
+
+message CreateUserRequest {
+  string name = 1;
+  double balance = 2;
+}
+
+message GetUserRequest {
+  int32 id = 1;
+}
+
+message UserResponse {
+  int32 id = 1;
+  string name = 2;
+  double balance = 3;
+}
+
+message DepositRequest {
+  int32 id = 1;
+  double amount = 2;
+}
+
+message DepositResponse {
+  string message = 1;
+  UserResponse user = 2;
+}
