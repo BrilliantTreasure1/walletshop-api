@@ -1,9 +1,11 @@
-const grpc = require("@grpc/grpc-js");
+const path = require("path"); 
 require('dotenv').config({ path: '../.env' }); 
+
+const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 const pool = require('../db');
 
-const packageDef = protoLoader.loadSync("../proto/user.proto", {});
+const packageDef = protoLoader.loadSync(path.join(__dirname, "../proto/user.proto"), {});
 const grpcObj = grpc.loadPackageDefinition(packageDef);
 const userPackage = grpcObj.user;
 

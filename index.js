@@ -2,7 +2,7 @@ const exprees = require("express");
 const app = exprees();
 app.use(exprees.json());
 
-app.use('/users' , require('./routes/user'));
+app.use('/users' , require('./user/user_client'));
 app.use('/products' , require('./routes/products'));
 app.use('/orders' , require('./routes/orders'));
 
