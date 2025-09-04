@@ -1,7 +1,7 @@
 # 🛒 Online Store API
 
 This is a RESTful API for an online store, built with **Node.js**, **Express**, and **PostgreSQL**, featuring:
-- User creation with internal wallet
+- User creation and wallet management via gRPC
 - Product management (CRUD)
 - Order system with wallet-based payment
 - Dockerized PostgreSQL integration
@@ -10,7 +10,7 @@ This is a RESTful API for an online store, built with **Node.js**, **Express**, 
 
 ## 🚀 Features
 
-- Create and manage users with internal wallet system
+- Create and manage users with internal wallet system via gRPC
 - Full CRUD operations for products
 - Place, update, view and delete orders
 - Pay for orders using internal wallet
