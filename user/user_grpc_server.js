@@ -1,7 +1,7 @@
 const grpc = require("@grpc/grpc-js");
+require('dotenv').config({ path: '../.env' }); 
 const protoLoader = require("@grpc/proto-loader");
 const pool = require('../db');
-
 
 const packageDef = protoLoader.loadSync("../proto/user.proto", {});
 const grpcObj = grpc.loadPackageDefinition(packageDef);
@@ -80,7 +80,7 @@ function main() {
       "0.0.0.0:50052",
       grpc.ServerCredentials.createInsecure(),
       () => {
-        console.log("User gRPC server running on port 50051");
+        console.log("User gRPC server running on port 50052");
         server.start();
       }
     );
