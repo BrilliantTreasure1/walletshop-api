@@ -6,10 +6,19 @@ const pool = require('../db');
 router.get('/' , async (req,res) => {
     try {
         const result = await pool.query('SELECT * FROM products');
+
+        const etag = `"${result.rows.length}-${result.rows[result.rows.length - 1]?.id || 0}"`;
+        res.set('ETag', etag);
+
+        if (req.headers['if-none-match'] === etag) {
+            return res.status(304).end();
+          }
+
+        res.set('Cache-Control', 'max-age=300, public');
         res.json(result.rows);
     } catch (error) {
-        console.error(err);
-        res.status(500).send('خطای سرور');
+        console.error(error);
+        res.status(500).send('server error');
     }
 })
 
@@ -19,12 +28,12 @@ router.get('/:id', async (req ,res) => {
     try {
         const result = await pool.query('SELECT * FROM products WHERE id = $1',[id]);
         if (result.rows.length === 0 ) {
-            return res.status(404).send('محصول پیدا نشد');
+            return res.status(404).send('can not find any product');
         }
         res.json(result.rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).send('خطای سرور');
+        res.status(500).send('server error');
     }
 })
 
